@@ -7,10 +7,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class HiServlet
- */
-@WebServlet("/hi")
+/*
+ 	URLMapping 수정하는 방법
+ 	방법 1. 서블릿을 열고 @WebServlet 애너테이션을 수정한다. (개발에 편리)
+ 	방법 2. web.xml을 열고 <servlet> 태그와 <servlet-mapping> 태그를 추가한다. (운영에 편리)
+*/
+
+@WebServlet("/HiServlet")	//@WebServlet({"/hi", "/hello"};처럼 2개 이상의 URLMapping 지정이 가능하다.
+
 public class HiServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
