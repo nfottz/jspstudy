@@ -29,16 +29,17 @@
 <body>
 
 	<!-- 작성자와 제목이 비어 있는 경우에는 submit을 방지하시오! -->
-	
+
 	<div>
-		<form id="frm_write" method="post" action="/01_Servlet/CreateFileServlet">
+		<form id="frm_write" method="post"
+			action="/01_Servlet/CreateFileServlet">
 			<div>
-				<label for="writer">작성자</label>
-				<input type="text" id="writer" name="writer">
+				<label for="writer">작성자</label> <input type="text" id="writer"
+					name="writer">
 			</div>
 			<div>
-				<label for="title">제목</label>
-				<input type="text" id="title" name="title">
+				<label for="title">제목</label> <input type="text" id="title"
+					name="title">
 			</div>
 			<div>
 				<textarea name="content" rows="5" cols="30" placeholder="내용"></textarea>
