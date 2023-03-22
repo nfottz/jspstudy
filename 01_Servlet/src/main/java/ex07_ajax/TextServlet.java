@@ -21,11 +21,11 @@ public class TextServlet extends HttpServlet {
 			
 			// 요청 파라미터
 			String model = request.getParameter("model");
-			String priceStr = request.getParameter("price");
+			String strPrice = request.getParameter("price");
 			int price = 0;
-			if(priceStr != null && priceStr.isEmpty() == false) {
+			if(strPrice != null && strPrice.isEmpty() == false) {
 				// NumberFormatException 발생 가능(priceStr이 정수가 아닌 경우)
-				price = Integer.parseInt(priceStr);
+				price = Integer.parseInt(strPrice);
 			}
 			
 			// 마이너스 금액의 예외 처리
