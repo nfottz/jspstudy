@@ -60,6 +60,22 @@
 		}
 		
 	</script>
+	
+	<!-- jquery-ui 활용을 위한 css와 js 포함(head 태그에 포함하는 것을 추천!) -->
+	<link rel="stylesheet" href="../resources/jquery-ui-1.13.2/jquery-ui.css">
+	<script src="../resources/jquery-ui-1.13.2/jquery-ui.js"></script>
+	<div>
+		<h1>국제선 운항 스케줄</h1>
+		<form id="frm2">
+			<label for="schDate">검색일자</label>
+				<input type="text" id="schDate" name="schDate">
+		</form>
+	</div>
+	<script>
+		$('#schDate').datepicker({
+			dateFormat: "yymmdd"
+		});
+	</script>
 
 </body>
 </html>
