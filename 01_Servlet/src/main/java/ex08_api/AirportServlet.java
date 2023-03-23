@@ -14,41 +14,40 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/AirKoreaApi")
-public class AirKoreaApi extends HttpServlet {
+@WebServlet("/AirportServlet")
+public class AirportServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		// 요청 인코딩
 		request.setCharacterEncoding("UTF-8");
+		String schDate = request.getParameter("schDate");
+		String schDeptCityCode = request.getParameter("schDeptCityCode");
+		String schArrvCityCode = request.getParameter("schArrvCityCode");
 		
-		// 요청 파라미터
-		String sidoName = request.getParameter("sidoName");
-		String returnType = request.getParameter("returnType");
-		
-		// 서비스키
 		String serviceKey = "GxglCuHtwp4CJcuT52KlHO7b6Wbrih22bXKzL4adhI7UbMQt9zCNMnoyqziFiAmTxpxMcsGIbqnduYKgPQdtYg==";
 		
-		// 요청 주소
-		String apiURL = "http://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getCtprvnRltmMesureDnsty";
-		apiURL += "?serviceKey=" + URLEncoder.encode(serviceKey, "UTF-8");
-		apiURL += "&sidoName=" + URLEncoder.encode(sidoName, "UTF-8");
-		apiURL += "&returnType=" + URLEncoder.encode(returnType, "UTF-8");
+//		String apiURL = "http://openapi.airport.co.kr/service/rest/FlightScheduleList/getIflightScheduleList";
+//		apiURL += "?serviceKey=" + URLEncoder.encode(serviceKey, "UTF-8");
+//		apiURL += "&pageNo=" + URLEncoder.encode("1", "UTF-8");
+//		apiURL += "&schDate=" + URLEncoder.encode(schDate, "UTF-8");
+//		apiURL += "&schDeptCityCode=" + URLEncoder.encode(schDeptCityCode, "UTF-8");
+//		apiURL += "&schArrvCityCode=" + URLEncoder.encode(schArrvCityCode, "UTF-8");
 		
-		// URL
+		StringBuilder sbURL = new StringBuilder();
+		sbURL.append("http://openapi.airport.co.kr/service/rest/FlightScheduleList/getIflightScheduleList");
+		sbURL.append("?serviceKey=" + URLEncoder.encode(serviceKey, "UTF-8"));
+		sbURL.append("&pageNo=" + URLEncoder.encode("1", "UTF-8"));
+		sbURL.append("&schDate=" + URLEncoder.encode(schDate, "UTF-8"));
+		sbURL.append("&schDeptCityCode=" + URLEncoder.encode(schDeptCityCode, "UTF-8"));
+		sbURL.append("&schArrvCityCode=" + URLEncoder.encode(schArrvCityCode, "UTF-8"));
+		String apiURL = sbURL.toString();
+		
 		URL url = new URL(apiURL);
-		
-		// HttpURLConnection
 		HttpURLConnection con = (HttpURLConnection)url.openConnection();
-		
-		// 요청 메소드
 		con.setRequestMethod("GET");
+		con.setRequestProperty("Content-Type", "application/xml; charset=UTF-8");
 		
-		// returnType에 따른 Content-Type
-		con.setRequestProperty("Content-Type", "application/" + returnType + "; charset=UTF-8");
-		
-		// 입력 스트림 생성
 		BufferedReader reader = null;
 		if(con.getResponseCode() == HttpURLConnection.HTTP_OK) {
 			reader = new BufferedReader(new InputStreamReader(con.getInputStream()));
@@ -56,19 +55,15 @@ public class AirKoreaApi extends HttpServlet {
 			reader = new BufferedReader(new InputStreamReader(con.getErrorStream()));
 		}
 		
-		// 입력 (API의 응답 결과를 StringBuilder에 저장)
 		StringBuilder sb = new StringBuilder();
 		String line = null;
 		while((line = reader.readLine()) != null) {
-			sb.append(line);
+			sb.append(line + "\n");
 		}
-		
-		// 입력 스트림, 접속 종료
 		reader.close();
 		con.disconnect();
-		
-		// API 결과를 ajax 응답 처리하기
-		response.setContentType("application/" + returnType + "; charset=UTF-8");
+
+		response.setContentType("application/xml; charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		out.println(sb.toString());
 		out.flush();
