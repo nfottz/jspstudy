@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 /*
@@ -33,17 +32,21 @@ public class JSONServlet extends HttpServlet {
 			
 			// 요청 파라미터
 			String name = request.getParameter("name");
-			if(name.length() < 2 || name.length() > 6) {
-				throw new RuntimeException("601" + name + "은 잘못된 이름 입니다.");
-			}
 			String strAge = request.getParameter("age");
 			int age = 0;
 			if(strAge != null && strAge.isEmpty() == false) {
 				age = Integer.parseInt(strAge);
 			}
-			if(age < 0 || age > 100) {
-				throw new RuntimeException("600" + age + "살은 잘못된 나이입니다.");
+			
+			// 이름 예외 처리
+			if(name.length() < 2 || name.length() > 6) {
+				throw new NameHandleException(name + "은 잘못된 이름 입니다.", 601);
 			}
+			// 나이 예외 처리
+			if(age < 0 || age > 100) {
+				throw new AgeHandleException(age + "살은 잘못된 나이입니다.", 600);
+			}
+
 			// 응답할 JSON 데이터
 			JSONObject person = new JSONObject();
 			person.put("name", name);
@@ -51,20 +54,25 @@ public class JSONServlet extends HttpServlet {
 			
 			// 응답 데이터 타입
 			response.setContentType("application/json; charset=UTF-8");
+//			response.setContentType("text/plain; charset=UTF-8");
 			
 			// 출력 스트림 생성
 			PrintWriter out = response.getWriter();
 			
 			// 출력
-			out.println(person.toString());	// 텍스트 형식으로 된 JSON 데이터를 응답한다.
+			String resData = person.toString();
+			out.println(resData);	// 텍스트 형식으로 된 JSON 데이터를 응답한다.
 			out.flush();
 			out.close();
-		} catch(RuntimeException e) {
+			
+		} catch(MyHandleException e) {
 			response.setContentType("text/plain; charset=UTF-8");
-			response.setStatus(Integer.parseInt(e.getMessage().substring(0,3)));
+			response.setStatus(e.getErrorCode());
 			PrintWriter out = response.getWriter();
-			out.println(e.getMessage().substring(3));
-		}
+			out.println(e.getMessage());
+			out.flush();
+			out.close();
+		} 
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

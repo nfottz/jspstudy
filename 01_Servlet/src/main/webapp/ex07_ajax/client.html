@@ -60,16 +60,51 @@
 				
 				/* 응답 */
 				dataType: 'json',
+				// dataType: 'text',
 				success: (resData)=>{	// resData = {"name":이름, "age":나이} (Object O String X)
 					$('#content2').append($('<div>').text(resData));
 					$('#content2').append($('<div>').text(resData.name));
 					$('#content2').append($('<div>').text(resData.age));
+					// $('#content2').append($('<div>').text(JSON.parse(resData).name));
+					// $('#content2').append($('<div>').text(JSON.parse(resData).age));
 				},
 				error: (jqXHR)=>{
 					$('#content2').append($('<div>').text('status : ' + jqXHR.status));
 					$('#content2').append($('<div>').text('responseText : ' + jqXHR.responseText));
 				}
 				
+			})
+		})
+	</script>
+	
+	<div>
+		<form id="frm_book">
+			<input type="text" name="title" placeholder="제목">
+			<input type="text" name="author" placeholder="저자">
+			<input type="text" name="price" placeholder="가격">
+			<input type="button" id="btn3" value="XML요청">
+		</form>
+		<div id="content3"></div>
+	</div>
+	<script>
+		$('#btn3').on('click', function(){
+			$('#content3').empty();
+			$.ajax({
+				type: 'get',
+				url: '/01_Servlet/XMLServlet',
+				data: $('#frm_book').serialize(),
+				
+				dataType: 'xml',
+				success: (resData)=>{
+					var ul = $('<ul>');
+					ul.append($('<li>').text('제목 : ' + $(resData).find('title').text()));
+					ul.append($('<li>').text('저자 : ' + $(resData).find('author').text()));
+					ul.append($('<li>').text('가격 : ' + $(resData).find('price').text()));
+					$('#content3').append(ul);
+				},
+				error: (jqXHR)=>{
+					
+				}
 			})
 		})
 	</script>
