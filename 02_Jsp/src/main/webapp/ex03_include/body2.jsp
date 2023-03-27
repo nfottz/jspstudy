@@ -7,4 +7,4 @@
 
 	<h1>body2</h1>
 	
-	<%@ include file="footer.jsp" %>
+<%@ include file="footer.jsp" %>

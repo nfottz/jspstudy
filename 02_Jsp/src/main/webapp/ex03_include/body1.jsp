@@ -9,4 +9,4 @@
 	<h1>body1</h1>
 
 <%-- 정적 include : 항상 같은 모습의 페이지를 포함한다. (include 지시어) --%>
-	<%@ include file="footer.jsp" %>
+<%@ include file="footer.jsp" %>
