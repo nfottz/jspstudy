@@ -11,34 +11,22 @@
 	String title = opt.orElse("환영합니다!");
 %>
 <title><%=title %></title>
-<style>
-	nav ul {
-		display: flex;
-		list-style-type: none;
-		background-color: #f0f0f0;
-	}
-	nav ul li {
-		width: 100px;
-		height: 30px;
-		text-align: center;
-		line-height: 30px;
-	}
-	nav ul li a {
-		text-decoration: none;
-		color: #cf05aa;
-		display: block;
-		width: 100%;
-		height: 100%;
-	}
-</style>
+<%-- request.getContextPath() == /02_Jsp --%>
+<link rel="styleSheet" type="text/css" href="<%=request.getContextPath() %>/resources/css/header.css">
+<script src="<%=request.getContextPath() %>/resources/js/webapp/jquery-3.6.4.min.js"></script>
 </head>
 <body>
 
 	<nav>
 		<ul>
-			<li><a href="body1.jsp">body1</a></li>
+			<% for(int i = 1; i <= 3; i++) { %>
+					<li><a href="body<%=i %>.jsp">body<%=i %></a></li>
+			<% } %>
+			
+<!--		<li><a href="body1.jsp">body1</a></li>
 			<li><a href="body2.jsp">body2</a></li>
 			<li><a href="body3.jsp">body3</a></li>
+  -->
 		</ul>
 	</nav>
 	
