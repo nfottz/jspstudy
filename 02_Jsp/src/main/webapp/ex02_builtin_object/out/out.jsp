@@ -8,5 +8,26 @@
 </head>
 <body>
 
+	<%
+		String[] seasons = {"spring", "summer", "autumn", "winter"};
+	%>
+	
+	<ul>
+		<% for(int i = 0; i < seasons.length; i++){ %>
+			<li><%=seasons[i] %></li>
+		<%} %>
+	</ul>
+	
+	<hr>
+	
+	<%-- out 객체 활용하기 --%>
+	<ul>
+		<%
+			for(int i = 0; i < seasons.length; i++){
+				out.println("<li>" + seasons[i] + "</li>");
+			}
+		%>
+	</ul>
+
 </body>
 </html>
