@@ -33,7 +33,7 @@ public class CookieServlet1 extends HttpServlet {
 		
 		// 쿠키 유효시간 설정하기 (생략하면 세션쿠키가 된다. : 브라우저를 닫을 때까지 보관된다.)
 		cookie1.setMaxAge(3600 * 24 * 7); 	// 7일간 보관되는 쿠키
-		cookie2.setMaxAge(3600); 			// 10초동안 보관되는 쿠키
+		cookie2.setMaxAge(10); 				// 10초동안 보관되는 쿠키
 		
 		// 쿠키 저장하기(응답으로 처리해야 한다.)
 		response.addCookie(cookie1);
