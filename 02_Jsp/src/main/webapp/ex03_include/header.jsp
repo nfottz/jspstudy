@@ -12,7 +12,8 @@
 %>
 <title><%=title %></title>
 <%-- request.getContextPath() == /02_Jsp --%>
-<link rel="styleSheet" type="text/css" href="<%=request.getContextPath() %>/resources/css/header.css">
+<%-- 외부 정적 파일(css, js)을 포함할 때는 매번 경로가 변할 수 있도록 처리한다. --%>
+<link rel="styleSheet" type="text/css" href="<%=request.getContextPath() %>/resources/css/header.css?dt=<%=System.currentTimeMillis()%>">
 <script src="<%=request.getContextPath() %>/resources/js/webapp/jquery-3.6.4.min.js"></script>
 </head>
 <body>
