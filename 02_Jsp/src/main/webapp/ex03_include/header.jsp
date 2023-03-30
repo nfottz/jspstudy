@@ -12,7 +12,8 @@
 %>
 <title><%=title %></title>
 <%-- request.getContextPath() == /02_Jsp --%>
-<%-- 외부 정적 파일(css, js)을 포함할 때는 매번 경로가 변할 수 있도록 처리한다. --%>
+<%-- 외부 정적 파일(css, js)을 포함할 때는 매번 경로가 변할 수 있도록 처리한다.
+	경로가 변해야 캐싱한 내용을 사용하지 않고 외부 파일을 (새로) 읽는다. --%>
 <link rel="styleSheet" type="text/css" href="<%=request.getContextPath() %>/resources/css/header.css?dt=<%=System.currentTimeMillis()%>">
 <script src="<%=request.getContextPath() %>/resources/js/webapp/jquery-3.6.4.min.js"></script>
 </head>
