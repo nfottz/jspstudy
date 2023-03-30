@@ -1,3 +1,6 @@
+<%@page import="java.time.LocalDate"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="ex07_jstl.Webtoon"%>
 <%@page import="java.util.Arrays"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -60,5 +63,30 @@
 		<div>인덱스 : ${k.index }, 순번 : ${k.count }, 요소 : ${job }</div>
 	</c:forEach>
 	
+	<hr>
+	
+	<%-- 객체 + 리스트 --%>
+	<%
+		List<Webtoon> webtoonList = new ArrayList<>();
+		webtoonList.add(new Webtoon(415, "트와일라잇", 9.95, LocalDate.of(2022, 11, 16)));
+		webtoonList.add(new Webtoon(416, "내시반청", 9.95, LocalDate.of(2022, 11, 23)));
+		webtoonList.add(new Webtoon(417, "보통의 시선", 9.95, LocalDate.of(2022, 11, 30)));
+		webtoonList.add(new Webtoon(418, "텐션", 9.95, LocalDate.of(2022, 12, 7)));
+		webtoonList.add(new Webtoon(419, "HBLJ", 9.96, LocalDate.of(2022, 12, 14)));
+		pageContext.setAttribute("webtoonList", webtoonList);
+	%>
+	
+	<table border="1">
+		<tbody>
+			<c:forEach var="webtoon"  items="${webtoonList }">
+				<tr>
+					<td>${webtoon.webtoonNo }</td>
+					<td>${webtoon.title }</td>
+					<td>${webtoon.star }</td>
+					<td>${webtoon.uploadDate }</td>
+				</tr>
+			</c:forEach>
+		</tbody>
+	</table>
 </body>
 </html>
