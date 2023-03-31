@@ -7,7 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import common.ActionForward;
 import model.MyAgeService;
+import model.MyBmiService;
 import model.MyService;
 import model.MyTodayService;
 
@@ -27,6 +29,9 @@ public class MyController extends HttpServlet {
 		String contextPath = request.getContextPath();						/* /03_Mvc			*/
 		String urlMapping = requestURI.substring(contextPath.length());		/* /today.do		*/
 		
+		// ActionForward 객체 선언하기
+		ActionForward actionForward = null;
+		
 		// MyService 인터페이스 타입의 myService 객체 선언하기
 		MyService myService = null;
 		
@@ -35,13 +40,23 @@ public class MyController extends HttpServlet {
 			myService = new MyTodayService();
 		} else if(urlMapping.equals("/age.do")) {
 			myService = new MyAgeService();
+		} else if(urlMapping.equals("/bmi.do")) {
+			myService = new MyBmiService();
 		}
 		
 		// 모델(서비스) 실행하기
-		String path = myService.execute(request, response);
+		if(myService != null) {
+			actionForward = myService.execute(request, response);			
+		}
 		
 		// 응답 View로 이동하기
-		request.getRequestDispatcher(path).forward(request, response);
+		if(actionForward != null) {
+			if(actionForward.isRedirect()) {
+				response.sendRedirect(actionForward.getPath());
+			} else {
+				request.getRequestDispatcher(actionForward.getPath()).forward(request, response);
+			}
+		}
 		
 	}
 
