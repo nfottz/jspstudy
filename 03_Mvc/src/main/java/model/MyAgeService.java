@@ -5,10 +5,11 @@ import java.util.Calendar;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class AgeService {
+public class MyAgeService implements MyService {
 
+	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
-		
+
 		String strBirthyear = request.getParameter("birthyear");
 		int birthyear = Integer.parseInt(strBirthyear);
 		int nowyear = Calendar.getInstance().get(Calendar.YEAR);
@@ -17,5 +18,5 @@ public class AgeService {
 		
 		return "view/output.jsp";
 	}
-	
+
 }
