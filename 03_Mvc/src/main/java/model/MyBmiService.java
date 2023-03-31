@@ -13,14 +13,10 @@ public class MyBmiService implements MyService {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
 		
 		Optional<String> opt1 = Optional.ofNullable(request.getParameter("height"));
-		double height = Double.parseDouble(opt1.orElse("1"));
+		double height = Double.parseDouble(opt1.orElse("0"));
+		
 		Optional<String> opt2 = Optional.ofNullable(request.getParameter("weight"));
 		double weight = Double.parseDouble(opt2.orElse("0"));
-		
-//		String heightStr = request.getParameter("height");
-//		String weightStr = request.getParameter("weight");
-//		double height = heightStr.equals("")? 0 : Double.parseDouble(heightStr);
-//		double weight = weightStr.equals("")? 0 : Double.parseDouble(weightStr);
 		
 		double bmi = weight / ((height/100) * (height/100));
 		String health = bmi < 20? "저체중" : bmi < 25? "정상" : "비만";
