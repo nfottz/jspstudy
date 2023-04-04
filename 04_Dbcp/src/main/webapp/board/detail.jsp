@@ -15,7 +15,18 @@
 <script src="${contextPath}/resources/js/lib/jquery-3.6.4.min.js"></script>
 <script>
 	$(function(){
-
+		// 서브밋
+		$('#frm_write').on('submit', function(event){
+			if($('#title').val() === ''){
+				alert('제목은 필수입니다.');
+				event.preventDefault();
+				return;
+			}
+		})
+		// 목록
+		$('#btn_list').on('click', function(){
+			location.href = '${contextPath}/getAllBoardList.do';
+		})
 	})
 </script>
 </head>
