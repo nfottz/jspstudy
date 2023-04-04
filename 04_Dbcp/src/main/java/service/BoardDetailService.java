@@ -38,11 +38,11 @@ public class BoardDetailService implements IBoardService {
 			}
 		}
 		
-		// 3. DB에서 가져온 게시글(BoardDTO board)을 request에 저장
+		// 4. DB에서 가져온 게시글(BoardDTO board)을 request에 저장
 		// (상세보기 화면 - board/detail.jsp으로 전달(forward)하기 위해서)
 		request.setAttribute("board", board);
 		
-		// 4. 어디로 어떻게 이동할 것인가
+		// 5. 어디로 어떻게 이동할 것인가
 		return new ActionForward("board/detail.jsp", false);
 	}
 
