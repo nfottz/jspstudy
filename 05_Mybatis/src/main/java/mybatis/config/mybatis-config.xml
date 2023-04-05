@@ -15,7 +15,7 @@
 
 	<!-- typeAliases -->
 	<typeAliases>
-		<typeAlias alias="" type="" />
+		<typeAlias alias="Bbs" type="domain.BbsDTO" />
 	</typeAliases>
 
 	<!-- 환경 설정 -->
