@@ -15,7 +15,7 @@
 
 	<!-- typeAliases -->
 	<typeAliases>
-		<typeAlias alias="Bbs" type="domain.BbsDTO" />
+		<typeAlias alias="Member" type="domain.Member" />
 	</typeAliases>
 
 	<!-- 환경 설정 -->
@@ -33,7 +33,7 @@
 
 	<!-- mapper 경로 설정하기 -->
 	<mappers>
-		<mapper resource="mybatis/mapper/bbs.xml" />
+		<mapper resource="mybatis/mapper/member.xml" />
 	</mappers>
 
 </configuration>
