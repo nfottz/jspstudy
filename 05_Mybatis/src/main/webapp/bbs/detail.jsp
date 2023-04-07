@@ -24,7 +24,6 @@
 	function goList(){
 		location.href="${contextPath}/list.do"
 	}
-	
 </script>
 </head>
 <body>
